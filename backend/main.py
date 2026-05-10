@@ -3,6 +3,7 @@ TravelLoop — Main FastAPI application.
 """
 
 import os
+from contextlib import asynccontextmanager
 from dotenv import load_dotenv
 load_dotenv()
 
@@ -17,45 +18,7 @@ from models import City
 # Create all tables
 Base.metadata.create_all(bind=engine)
 
-app = FastAPI(
-    title="TravelLoop API",
-    description="AI-powered travel planning platform",
-    version="1.0.0"
-)
 
-# CORS
-app.add_middleware(
-    CORSMiddleware,
-    allow_origins=["http://localhost:5173", "http://localhost:3000", "http://127.0.0.1:5173"],
-    allow_credentials=True,
-    allow_methods=["*"],
-    allow_headers=["*"],
-)
-
-# Import and include routers
-from routers import users, trips, stops, activities, budget, checklist, notes, ai, smart_day
-
-app.include_router(users.router)
-app.include_router(trips.router)
-app.include_router(stops.router)
-app.include_router(activities.router)
-app.include_router(budget.router)
-app.include_router(checklist.router)
-app.include_router(notes.router)
-app.include_router(ai.router)
-app.include_router(smart_day.router)
-
-# Serve uploaded files
-os.makedirs("uploads", exist_ok=True)
-app.mount("/uploads", StaticFiles(directory="uploads"), name="uploads")
-
-
-@app.get("/")
-def root():
-    return {"message": "TravelLoop API is running", "docs": "/docs"}
-
-
-@app.on_event("startup")
 def seed_cities():
     """Seed 10 cities into the database on first run."""
     db: Session = SessionLocal()
@@ -99,3 +62,50 @@ def seed_cities():
             print("[OK] Seeded 10 cities into the database")
     finally:
         db.close()
+
+
+@asynccontextmanager
+async def lifespan(app):
+    """Application lifespan: seed database on startup."""
+    seed_cities()
+    yield
+
+
+app = FastAPI(
+    title="TravelLoop API",
+    description="AI-powered travel planning platform",
+    version="1.0.0",
+    lifespan=lifespan,
+)
+
+# CORS
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["http://localhost:5173", "http://localhost:3000", "http://127.0.0.1:5173"],
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
+
+# Import and include routers
+from routers import users, trips, stops, activities, budget, checklist, notes, ai, smart_day
+
+app.include_router(users.router)
+app.include_router(trips.router)
+app.include_router(stops.router)
+app.include_router(activities.router)
+app.include_router(budget.router)
+app.include_router(checklist.router)
+app.include_router(notes.router)
+app.include_router(ai.router)
+app.include_router(smart_day.router)
+
+# Serve uploaded files
+os.makedirs("uploads", exist_ok=True)
+app.mount("/uploads", StaticFiles(directory="uploads"), name="uploads")
+
+
+@app.get("/")
+def root():
+    return {"message": "TravelLoop API is running", "docs": "/docs"}
+
