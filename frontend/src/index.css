@@ -1,0 +1,290 @@
+@import "tailwindcss";
+
+/* ─── TravelLoop Design System ─── */
+
+@theme {
+  --color-primary: #F5A623;
+  --color-primary-light: #FFD080;
+  --color-primary-dark: #D4891A;
+  --color-secondary: #2D9CDB;
+  --color-secondary-light: #6BBFEF;
+  --color-secondary-dark: #1A7BB5;
+  --color-dark: #1A1A2E;
+  --color-dark-light: #16213E;
+  --color-dark-lighter: #0F3460;
+  --color-light: #F9F9F9;
+  --color-danger: #E74C3C;
+  --color-success: #27AE60;
+  --color-warning: #F39C12;
+  --font-family-sans: 'Inter', system-ui, -apple-system, sans-serif;
+}
+
+/* ─── Base Styles ─── */
+* {
+  box-sizing: border-box;
+}
+
+body {
+  font-family: var(--font-family-sans);
+  background: var(--color-light);
+  color: var(--color-dark);
+  margin: 0;
+  padding: 0;
+  min-height: 100vh;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* ─── Scrollbar ─── */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+::-webkit-scrollbar-track {
+  background: rgba(26, 26, 46, 0.05);
+  border-radius: 4px;
+}
+::-webkit-scrollbar-thumb {
+  background: rgba(245, 166, 35, 0.3);
+  border-radius: 4px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(245, 166, 35, 0.5);
+}
+
+/* ─── Glass Card ─── */
+.glass-card {
+  background: rgba(255, 255, 255, 0.85);
+  backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  border-radius: 16px;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.06);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+.glass-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.1);
+}
+
+/* ─── Gradient Backgrounds ─── */
+.gradient-hero {
+  background: linear-gradient(135deg, #1A1A2E 0%, #16213E 40%, #0F3460 70%, #2D9CDB 100%);
+}
+.gradient-primary {
+  background: linear-gradient(135deg, #F5A623 0%, #FFD080 100%);
+}
+.gradient-accent {
+  background: linear-gradient(135deg, #2D9CDB 0%, #6BBFEF 100%);
+}
+
+/* ─── Button Styles ─── */
+.btn-primary {
+  background: linear-gradient(135deg, #F5A623, #D4891A);
+  color: white;
+  font-weight: 600;
+  padding: 0.65rem 1.5rem;
+  border-radius: 12px;
+  border: none;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 15px rgba(245, 166, 35, 0.3);
+  font-size: 0.95rem;
+}
+.btn-primary:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 6px 20px rgba(245, 166, 35, 0.4);
+}
+.btn-primary:active {
+  transform: translateY(0);
+}
+
+.btn-secondary {
+  background: linear-gradient(135deg, #2D9CDB, #1A7BB5);
+  color: white;
+  font-weight: 600;
+  padding: 0.65rem 1.5rem;
+  border-radius: 12px;
+  border: none;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 15px rgba(45, 156, 219, 0.3);
+  font-size: 0.95rem;
+}
+.btn-secondary:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 6px 20px rgba(45, 156, 219, 0.4);
+}
+
+.btn-outline {
+  background: transparent;
+  color: var(--color-primary);
+  font-weight: 600;
+  padding: 0.6rem 1.5rem;
+  border-radius: 12px;
+  border: 2px solid var(--color-primary);
+  cursor: pointer;
+  transition: all 0.3s ease;
+  font-size: 0.95rem;
+}
+.btn-outline:hover {
+  background: var(--color-primary);
+  color: white;
+}
+
+.btn-danger {
+  background: linear-gradient(135deg, #E74C3C, #C0392B);
+  color: white;
+  font-weight: 600;
+  padding: 0.65rem 1.5rem;
+  border-radius: 12px;
+  border: none;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  font-size: 0.95rem;
+}
+
+.btn-ghost {
+  background: transparent;
+  color: var(--color-dark);
+  font-weight: 500;
+  padding: 0.5rem 1rem;
+  border-radius: 10px;
+  border: none;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  font-size: 0.9rem;
+}
+.btn-ghost:hover {
+  background: rgba(245, 166, 35, 0.1);
+  color: var(--color-primary);
+}
+
+/* ─── Input Styles ─── */
+.input-field {
+  width: 100%;
+  padding: 0.75rem 1rem;
+  border: 2px solid rgba(26, 26, 46, 0.1);
+  border-radius: 12px;
+  font-size: 0.95rem;
+  font-family: var(--font-family-sans);
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+  background: white;
+  color: var(--color-dark);
+}
+.input-field:focus {
+  outline: none;
+  border-color: var(--color-primary);
+  box-shadow: 0 0 0 3px rgba(245, 166, 35, 0.15);
+}
+.input-field::placeholder {
+  color: rgba(26, 26, 46, 0.4);
+}
+
+/* ─── Badge Styles ─── */
+.badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 0.25rem 0.75rem;
+  border-radius: 20px;
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+}
+.badge-primary { background: rgba(245, 166, 35, 0.15); color: #D4891A; }
+.badge-secondary { background: rgba(45, 156, 219, 0.15); color: #1A7BB5; }
+.badge-success { background: rgba(39, 174, 96, 0.15); color: #27AE60; }
+.badge-danger { background: rgba(231, 76, 60, 0.15); color: #E74C3C; }
+.badge-warning { background: rgba(243, 156, 18, 0.15); color: #F39C12; }
+
+/* ─── Travel Time Pill ─── */
+.travel-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 0.35rem 0.85rem;
+  border-radius: 20px;
+  font-size: 0.8rem;
+  font-weight: 600;
+}
+.travel-pill-green { background: #d4edda; color: #155724; }
+.travel-pill-yellow { background: #fff3cd; color: #856404; }
+.travel-pill-red { background: #f8d7da; color: #721c24; }
+
+/* ─── Animations ─── */
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+@keyframes slideInRight {
+  from { opacity: 0; transform: translateX(20px); }
+  to { opacity: 1; transform: translateX(0); }
+}
+@keyframes slideInUp {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+@keyframes pulse-glow {
+  0%, 100% { box-shadow: 0 0 5px rgba(245, 166, 35, 0.3); }
+  50% { box-shadow: 0 0 20px rgba(245, 166, 35, 0.6); }
+}
+@keyframes shimmer {
+  0% { background-position: -200% 0; }
+  100% { background-position: 200% 0; }
+}
+
+.animate-fade-in { animation: fadeIn 0.4s ease-out forwards; }
+.animate-slide-right { animation: slideInRight 0.4s ease-out forwards; }
+.animate-slide-up { animation: slideInUp 0.4s ease-out forwards; }
+
+/* ─── Skeleton Loading ─── */
+.skeleton {
+  background: linear-gradient(90deg, #f0f0f0 25%, #e0e0e0 50%, #f0f0f0 75%);
+  background-size: 200% 100%;
+  animation: shimmer 1.5s infinite;
+  border-radius: 8px;
+}
+
+/* ─── Modal Overlay ─── */
+.modal-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(26, 26, 46, 0.5);
+  backdrop-filter: blur(4px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 50;
+  animation: fadeIn 0.2s ease;
+}
+.modal-content {
+  background: white;
+  border-radius: 20px;
+  padding: 2rem;
+  max-width: 550px;
+  width: 90%;
+  max-height: 90vh;
+  overflow-y: auto;
+  box-shadow: 0 25px 50px rgba(0, 0, 0, 0.15);
+  animation: slideInUp 0.3s ease-out;
+}
+
+/* ─── Day Load Meter ─── */
+.load-meter {
+  height: 10px;
+  border-radius: 5px;
+  background: rgba(26, 26, 46, 0.1);
+  overflow: hidden;
+}
+.load-meter-fill {
+  height: 100%;
+  border-radius: 5px;
+  transition: width 0.5s ease, background 0.5s ease;
+}
+
+/* ─── Leaflet Fix ─── */
+.leaflet-container {
+  height: 400px;
+  width: 100%;
+  border-radius: 16px;
+  z-index: 1;
+}
